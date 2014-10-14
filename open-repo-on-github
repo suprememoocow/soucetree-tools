@@ -1,0 +1,23 @@
+#!/bin/bash
+
+set -x
+set -e
+# Usage open-repo-on-github [REPO]
+
+REPO=$1
+if [[ -z $REPO ]]; then
+    pushd .
+    cd $REPO
+fi
+
+git config --get remote.origin.url
+
+ORIGIN=`git config --get remote.origin.url`
+ORIGIN=${ORIGIN%.git}
+ORIGIN=${ORIGIN#git@github.com:}
+
+echo https://github.com/${ORIGIN}
+
+if [[ -z $REPO ]]; then
+    popd
+fi
