@@ -5,7 +5,7 @@
 set -x
 
 REPO=$1
-PAGE=$2
+SHA=$2
 
 if [[ ! -z $REPO ]]; then
     pushd .
@@ -16,10 +16,11 @@ ORIGIN=`git config --get remote.origin.url`
 ORIGIN=${ORIGIN%.git}
 ORIGIN=${ORIGIN#git@github.com:}
 
-if [[ ! -z $PAGE ]]; then
-    open https://github.com/${ORIGIN}/$PAGE
-else
+
+if [[ -z $SHA ]]; then
     open https://github.com/${ORIGIN}
+else
+    open https://github.com/${ORIGIN}/commit/$SHA
 fi
 
 if [[ ! -z $REPO ]]; then
