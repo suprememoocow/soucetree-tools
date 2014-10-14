@@ -1,10 +1,12 @@
 #!/bin/bash
 
+# Usage open-repo-on-github [REPO] [SHA]
+
 set -x
-set -e
-# Usage open-repo-on-github [REPO]
 
 REPO=$1
+SHA=$2
+
 if [[ ! -z $REPO ]]; then
     pushd .
     cd $REPO
@@ -14,7 +16,12 @@ ORIGIN=`git config --get remote.origin.url`
 ORIGIN=${ORIGIN%.git}
 ORIGIN=${ORIGIN#git@github.com:}
 
-open https://github.com/${ORIGIN}
+
+if [[ -z $SHA ]]; then
+    open https://github.com/${ORIGIN}
+else
+    open https://github.com/${ORIGIN}/commit/$SHA
+fi
 
 if [[ ! -z $REPO ]]; then
     popd
