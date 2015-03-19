@@ -12,16 +12,7 @@ if [[ ! -z $REPO ]]; then
     cd $REPO
 fi
 
-ORIGIN=`git config --get remote.origin.url`
-ORIGIN=${ORIGIN%.git}
-ORIGIN=${ORIGIN#git@github.com:}
-
-
-if [[ -z $SHA ]]; then
-    open https://github.com/${ORIGIN}
-else
-    open https://github.com/${ORIGIN}/commit/$SHA
-fi
+bash -lc "/usr/local/bin/gh browse commits/$SHA"
 
 if [[ ! -z $REPO ]]; then
     popd

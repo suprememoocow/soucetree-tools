@@ -12,15 +12,7 @@ if [[ ! -z $REPO ]]; then
     cd $REPO
 fi
 
-ORIGIN=`git config --get remote.origin.url`
-ORIGIN=${ORIGIN%.git}
-ORIGIN=${ORIGIN#git@github.com:}
-
-if [[ ! -z $PAGE ]]; then
-    open https://github.com/${ORIGIN}/$PAGE
-else
-    open https://github.com/${ORIGIN}
-fi
+bash -lc "/usr/local/bin/gh browse $PAGE"
 
 if [[ ! -z $REPO ]]; then
     popd
