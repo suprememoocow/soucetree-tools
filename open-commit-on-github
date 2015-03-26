@@ -12,7 +12,7 @@ if [[ ! -z $REPO ]]; then
     cd $REPO
 fi
 
-bash -lc "/usr/local/bin/gh browse commits/$SHA"
+bash -lc "/usr/local/bin/gh browse commit/$SHA"
 
 if [[ ! -z $REPO ]]; then
     popd
